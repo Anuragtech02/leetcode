@@ -6,23 +6,27 @@ using namespace std;
 
 vector<int> smallerNumbersThanCurrent(vector<int> &nums)
 {
-    // sort(nums.begin(), nums.end());
-    vector<int> res;
+    vector<int> sorted = nums, res;
+    sort(sorted.begin(), sorted.end());
 
-    int size = nums.size();
+    int size = sorted.size();
+    unordered_map<int, int> hash;
 
     for (int i = 0; i < size; i++)
     {
-        res.push_back(0);
+        //Check if the current element
+        // is already present in the map
+        if (hash.count(sorted[i]) == 0)
+        {
+            hash[sorted[i]] = i;
+        }
     }
 
     for (int i = 0; i < size; i++)
     {
-        for (int j = i; j < size; j++)
-        {
-            if (nums[j] < nums[i])
-                res[i]++;
-        }
+        // extract value of the ith number in nums
+        // from the hash and push to res
+        res.push_back(hash[nums[i]]);
     }
 
     return res;
