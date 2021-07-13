@@ -90,6 +90,57 @@ public:
         return 0;
     }
 
+    int deleteFromStart()
+    {
+        Node *temp = head;
+        int val = temp->data;
+        head = head->next;
+        delete temp;
+        return val;
+    }
+
+    int deleteFromEnd()
+    {
+        Node *temp = head;
+        while (temp->next->next != NULL)
+        {
+            temp = temp->next;
+        }
+        int val = temp->next->data;
+        temp->next = NULL;
+        delete temp->next;
+        return val;
+    }
+
+    int deletFromIndex(int index)
+    {
+        if (index < 0 || index >= this->size)
+        {
+            return -1;
+        }
+        if (index == 0)
+        {
+            deleteFromStart();
+            return 0;
+        }
+        if (index == this->size - 1)
+        {
+            deleteFromEnd();
+            return 0;
+        }
+
+        Node *curr = this->head;
+        for (int i = 0; i < index - 1; i++)
+        {
+            curr = curr->next;
+        }
+        Node *temp = curr->next;
+        curr->next = curr->next->next;
+        int val = temp->data;
+        delete temp;
+        return val;
+    }
+
     void printList()
     {
         Node *temp = head;
@@ -112,6 +163,17 @@ int main()
     if (res == -1)
         cout << "\nIndex out of bound\n";
     list->printList();
+    cout << endl;
+    int del1 = list->deleteFromStart();
+    list->printList();
+    cout << endl;
+    int del2 = list->deleteFromEnd();
+
+    list->printList();
+    cout << endl;
+    int del3 = list->deletFromIndex(1);
+    list->printList();
+    cout << endl;
 
     return 0;
 }
