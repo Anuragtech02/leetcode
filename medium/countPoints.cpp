@@ -3,7 +3,7 @@
 #include <math.h>
 using namespace std;
 
-int euclidianDistance(int x1, int y1, int x2, int y2)
+int distanceBtPoints(int x1, int y1, int x2, int y2)
 {
     return ceil(sqrt(pow((x1 - x2), 2) + pow(y1 - y2, 2)));
 }
@@ -17,7 +17,9 @@ vector<int> countPoints(vector<vector<int>> &points, vector<vector<int>> &querie
         int count = 0;
         for (vector<int> point : points)
         {
-            if (euclidianDistance(query[0], query[1, point[0], point[1]) <= query[2])
+            int distance = distanceBtPoints(query[0], query[1], point[0], point[1]);
+
+            if (distance <= query[2])
             {
                 count++;
             }
