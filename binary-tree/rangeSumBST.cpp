@@ -26,8 +26,8 @@ public:
         if (!root)
             return;
 
-        sum += liesBetweenRange(root->val, high, low) ? root->val : 0;
         traverse(root->left, low, high);
+        this->sum += liesBetweenRange(root->val, low, high) ? root->val : 0;
         traverse(root->right, low, high);
     }
     int rangeSumBST(TreeNode *root, int low, int high)
